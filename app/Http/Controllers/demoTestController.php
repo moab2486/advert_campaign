@@ -92,10 +92,10 @@ class demoTestController extends Controller
                             'name' => $a->name,
                             'isbn' => $a->isbn,
                             'authors' => $a->authors,
-                            'number_of_pages' => $a->numberOfPages,
+                            'number_of_pages' => $a->number_of_pages,
                             'publisher' => $a->publisher,
                             'country' => $a->country,
-                            'released_date' => $a->released
+                            'released_date' => $a->release_date
                         ];
         };
 
@@ -144,10 +144,10 @@ class demoTestController extends Controller
                             'name' => $a->name,
                             'isbn' => $a->isbn,
                             'authors' => $a->authors,
-                            'number_of_pages' => $a->numberOfPages,
+                            'number_of_pages' => $a->number_of_pages,
                             'publisher' => $a->publisher,
                             'country' => $a->country,
-                            'released_date' => $a->released
+                            'released_date' => $a->release_date
                         ];
         };
 

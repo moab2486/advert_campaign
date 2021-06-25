@@ -4,13 +4,13 @@ import axios from 'axios'
 
 Vue.use(Vuex);
 
-const store = new Vuex.store({
+const store = new Vuex.Store({
     state: {
         status: '',
         error: '',
-        books: {}
+        books: [],
     },
-    mutation: {
+    mutations: {
         request_status(state){
             state.status = 'loading'
         },      
@@ -23,13 +23,14 @@ const store = new Vuex.store({
             state.books = books
         },
     },
-    action: {
+    actions: {
         getBooks({commit}){
             return new Promise((resolve, reject) => {
               commit('request_status')
               axios.get(`books`)
                 .then(resp => {
-                    const books = resp.data;
+                    const books = resp.data.data;
+                    console.log(resp.data.data);
                     commit('get_books', books);
                     resolve()
                 })
