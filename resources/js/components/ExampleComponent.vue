@@ -82,7 +82,7 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr style="cursor: pointer">
-                    <th @click="sort('id')" scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                       ID 
                     </th>
                     <th @click="sort('name')" scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
@@ -150,7 +150,7 @@
                     Showing page(s)
                     <span class="font-medium">{{ currentPage }}</span>
                     of
-                    <span class="font-medium">{{Math.ceil(books.length / 5)}}</span>
+                    <span class="font-medium">{{Math.ceil(books.length / pageSize)}}</span>
                   </p>
                 </div>
                 <div>
@@ -165,11 +165,6 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
           </div>
         </div>
       </div>
