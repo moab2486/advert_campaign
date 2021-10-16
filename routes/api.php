@@ -14,13 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('external-books/{name?}', 'demoTestController@searchBookWithParam');
-Route::get('books', 'demoTestController@getBook');
-Route::get('books/{id}', 'demoTestController@showBook');
-Route::post('books', 'demoTestController@createBook');
-Route::put('books/{id}', 'demoTestController@updateBook');
-Route::delete('books/{id}', 'demoTestController@deleteBook');
-
+Route::match(['post', 'put'], 'submit_advert_campaign', 'advertisingCampaignController@submitCampaign');
+Route::get('retrive_campaigns', 'advertisingCampaignController@retriveCampaigns');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

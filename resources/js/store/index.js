@@ -8,7 +8,11 @@ const store = new Vuex.Store({
     state: {
         status: '',
         error: '',
-        books: [],
+        campaigns: {},
+        editCapaignData: {},
+        formTitle: '',
+        showCreatives: [],
+        showModal: false,
     },
     mutations: {
         request_status(state){
@@ -18,20 +22,31 @@ const store = new Vuex.Store({
             state.status = 'error'
             state.error = 'Invalid Login Credential'
         },
-        get_books(state, books){
+        get_campaign(state, campaign){
             state.status = 'status'
-            state.books = books
+            state.campaigns = campaign
+        },
+        create_campaign_button(state, val){
+            state.formTitle = val
+        },
+        edit_campaign_button(state, val){
+            state.editCapaignData = val
+        },
+        show_campaign_creatives(state, val){
+            state.showCreatives = val
+        },
+        trigger_modal(state, val){
+            state.showModal = val
         },
     },
     actions: {
-        getBooks({commit}){
+        getCampaign({commit}){
             return new Promise((resolve, reject) => {
               commit('request_status')
-              axios.get(`books`)
+              axios.get(`retrive_campaigns`)
                 .then(resp => {
-                    const books = resp.data.data;
-                    console.log(resp.data.data);
-                    commit('get_books', books);
+                    const campaign = resp.data.data;
+                    commit('get_campaign', campaign);
                     resolve()
                 })
                 .catch(err => {
@@ -39,6 +54,43 @@ const store = new Vuex.Store({
                     reject(err)
                 })
             })
+        },
+
+        createOrUpdateCampaign({commit}, campaignData){
+            return new Promise((resolve, reject) => {
+              commit('request_status')
+              axios({url:`submit_advert_campaign`, data:campaignData,  method: 'post',
+                  headers:{
+                    'Content-Type': 'multipart/form-data'
+                  } 
+              })
+                .then(resp => {
+                    const campaign = resp.data.data;
+                    commit('get_campaign', campaign);
+                    resolve()
+                })
+                .catch(err => {
+                    commit('request_error')
+                    reject(err)
+                })
+            })
+        },
+
+        createCamapaign({commit}, val){
+            commit("create_campaign_button", val)
+        },
+
+        editCampaign({commit}, val){
+            val.formTitle = "Edit campaign"
+            commit("edit_campaign_button", val)
+        },
+
+        showCampaignCreatives({commit}, val){
+            commit("show_campaign_creatives", val)
+        },
+
+        modalTrigger({commit}, val){
+            commit("trigger_modal", val)
         },
     }
 });
