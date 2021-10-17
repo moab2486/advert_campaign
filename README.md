@@ -1,27 +1,57 @@
-## About Basic CRUD
-
-Basic CRUD id built with vuejs, vuex, tailwind css for it UI, which consume an api endpoint built with laravel. Also, endpoint that consume data from IceAndFire API is also implemented using laravel.
+# Advert campaign is built using vueJs, vuex and laravel
 
 ## Requirements
-- php ^8.0.0
-- composer
-- node ^10.0.0
-- mysql or postgres or any RDB
 
-## Setup guide
+- PHP 8.0+, docker, docker-compose, NODE 14.0+
+- Other requirements can be found in the composer.json file
 
-- **Clone repo**
-- **Run: composer install**
-- **Create .env: cp .env.example .env**
-- **Generate app-key: php artisan key:generate**
-- **establish DB connection**
-- **install node dependancies: npm install**
+## Installing
+
+### Setup hosts (virtual host)
+
+- /etc/hosts (linux)
+- C:\Windows\System32\drivers\etc\hosts (Windows)
+
+### Installing
+- After clone run 'composer install' to install dependencies
+- run 'npm install' to install node dependancies
+- change directory to laradock-laraveldock
+- Enter the laradock folder `cp .env.example .env`
+- open docker-compose.yml file and edit the frontend and backend alias of NGINX to your created host
+- run `docker-compose up -d --build nginx phpmyadmin`
+- Navigate to phpmyadmin with default_host:8081 and create your database (lara_db in my case) with these credentials:
+	**Hostname: mysql**
+	**Username: test**
+	**Password: password**
+- `cp .env.example .env` within the project root
+- Edit the env to connet Laravel with Database
 
 
-## Run app
+```bash
+docker-compose exec workspace bash
 
-- **npm run build**
-- **php artisan serve**
+```
 
-## Author
-- Abdulkadir Abdulrasak (08060921291 , joloh57@gmail.com)
+Generate the new keys for the application:
+
+```bash
+artisan key:generate
+```
+
+Execute the migrations:
+
+```bash
+artisan migrate
+```
+
+### Build node
+
+```bash
+npm run prod
+```
+
+### To exit docker
+
+```bash
+docker-compose down
+```

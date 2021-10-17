@@ -43,7 +43,12 @@ const store = new Vuex.Store({
         getCampaign({commit}){
             return new Promise((resolve, reject) => {
               commit('request_status')
-              axios.get(`retrive_campaigns`)
+              axios({url:'retrive_campaigns', method: 'get', 
+                headers:{
+                    'accept-type': 'application/json',
+                    'content-type': 'application/json'
+                  } 
+              })
                 .then(resp => {
                     const campaign = resp.data.data;
                     commit('get_campaign', campaign);
@@ -61,7 +66,8 @@ const store = new Vuex.Store({
               commit('request_status')
               axios({url:`submit_advert_campaign`, data:campaignData,  method: 'post',
                   headers:{
-                    'Content-Type': 'multipart/form-data'
+                    'accept-type': 'multipart/form-data',
+                    'content-type': 'multipart/form-data'
                   } 
               })
                 .then(resp => {
@@ -82,6 +88,11 @@ const store = new Vuex.Store({
 
         editCampaign({commit}, val){
             val.formTitle = "Edit campaign"
+            commit("edit_campaign_button", val)
+        },
+
+        clearEditState({commit}){
+            var val = {};
             commit("edit_campaign_button", val)
         },
 

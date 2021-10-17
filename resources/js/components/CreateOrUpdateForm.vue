@@ -133,9 +133,8 @@ export default {
             this.campaign.total_advert_budget = null,
             this.campaign.advert_creatives_path = []
             if(this.campaign.edit){
-                this.campaign.titleHide = true
-                this.campaign.edit = false,
-                this.$router.replace('/')
+                this.$store.dispatch("clearEditState");
+                this.$router.replace('/');
             }
         }
     }
@@ -153,7 +152,7 @@ export default {
                 />
             </div>
             <div>
-                <h1 class="text-font" v-if="!campaign.titleHide">{{ campaign.formTitle }}</h1>
+                <h1 class="text-font">{{ campaign.formTitle }}</h1>
                 <h1 class="text-font">{{ form_title.formTitle }}</h1>
             </div>
         </div>
